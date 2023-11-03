@@ -14,9 +14,9 @@ const DROP_SPEED = 400;
 let BLOCK_SIZE;
 
 if (window.innerWidth <= 768) { // スマートフォンの幅と仮定して768px以下
-    BLOCK_SIZE = 20;
+  BLOCK_SIZE = 20;
 } else {
-    BLOCK_SIZE = 30;
+  BLOCK_SIZE = 30;
 }
 
 
@@ -430,7 +430,7 @@ pauseButton.addEventListener("click", function () {
     isPaused = false;
     // タイマー再開
     timerId = setInterval(dropTet, DROP_SPEED);
-    pauseButton.innerHTML = '<i class="fas fa-pause"></i><span class="d-none d-md-inline"> 一時停止</span>';
+    pauseButton.innerHTML = '<i class="fas fa-pause"></i><span class="d-none d-lg-inline"> 一時停止</span>';
     if (isGameOn) gameSound.play();
     pauseSound.play();
   } else {
@@ -438,7 +438,7 @@ pauseButton.addEventListener("click", function () {
     isPaused = true;
     // タイマー停止
     clearInterval(timerId);
-    pauseButton.innerHTML = '<i class="fas fa-play"></i><span class="d-none d-md-inline"> 再開</span> ';
+    pauseButton.innerHTML = '<i class="fas fa-play"></i><span class="d-none d-lg-inline"> 再開</span> ';
     if (isGameOn) gameSound.pause();
     pauseSound.play();
   }
@@ -461,7 +461,7 @@ const init = () => {
 
   // ポーズ状態をリセット
   isPaused = false;
-  pauseButton.innerHTML = '<i class="fas fa-pause"></i><span class="d-none d-md-inline"> 一時停止</span>';
+  pauseButton.innerHTML = '<i class="fas fa-pause"></i><span class="d-none d-lg-inline"> 一時停止</span>';
 
   createTetPosition();
 
@@ -502,7 +502,7 @@ const reInit = () => {
   // ポーズ状態をリセット
   isPaused = false;
   // ポーズボタンの表示をリセット
-  pauseButton.innerHTML = '<i class="fas fa-pause"></i><span class="d-none d-md-inline"> 一時停止</span>';
+  pauseButton.innerHTML = '<i class="fas fa-pause"></i><span class="d-none d-lg-inline"> 一時停止</span>';
   // ゲームスタート時の音を再生
   gameSound.currentTime = 0;
   gameSound.play();
@@ -528,7 +528,7 @@ $("#manualModal, #confirmModal").on("hidden.bs.modal", function () {
     // ゲームオーバーでなければ、ゲームのタイマーを再開
     timerId = setInterval(dropTet, DROP_SPEED);
     isPaused = false;
-    pauseButton.innerHTML = '<i class="fas fa-pause"></i><span class="d-none d-md-inline"> 一時停止</span>';
+    pauseButton.innerHTML = '<i class="fas fa-pause"></i><span class="d-none d-lg-inline"> 一時停止</span>';
     if (isGameOn) {
       gameSound.play();
     }
@@ -550,14 +550,14 @@ function toggleMute() {
     pauseSound.muted = false;
     scoreUpSound.muted = false;
 
-    muteButton.innerHTML = '<i class="fas fa-volume-up pr-2"></i><span class="d-none d-md-inline">ON</span>';
+    muteButton.innerHTML = '<i class="fas fa-volume-up pr-2"></i><span class="d-none d-lg-inline">ON</span>';
   } else {
     gameSound.muted = true;
     gameOverSound.muted = true;
     manualSound.muted = true;
     pauseSound.muted = true;
     scoreUpSound.muted = true;
-    muteButton.innerHTML = '<i class="fas fa-volume-off pr-2"></i><span class="d-none d-md-inline">OFF</span>';
+    muteButton.innerHTML = '<i class="fas fa-volume-off pr-2"></i><span class="d-none d-lg-inline">OFF</span>';
   }
   isMuted = !isMuted;
 }
