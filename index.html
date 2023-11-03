@@ -2,9 +2,7 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css" />
     <link rel="stylesheet" type="text/css" href="index.css" />
     <link
       rel="stylesheet"
@@ -26,36 +24,36 @@
   </head>
   <body>
     <div
-      class="root vh-100 d-flex justify-content-center align-items-md-center"
+      class="root min-vh-100 min-vw-100 d-flex justify-content-center align-items-md-center"
     >
       <div class="container">
         <div class="row text-center justify-content-center mx-md-5 px-md-5">
           <!-- 左側のブロック -->
           <div
-            class="col-12 col-md-4 row d-flex justify-content-center align-items-center mx-auto my-4 my-md-0"
+            class="col-12 col-md-4 row d-flex justify-content-md-center align-items-md-center mx-auto my-4 my-md-0"
           >
             <!-- タイトル -->
-            <div class="mt-4 mt-md-0">
-              <h1 class="display-1 fw-bold pr-2">Tetris</h1>
+            <div class="mt-md-2">
+              <h1 class="display-2 fw-bold mb-4 mb-md-0">Tetris</h1>
             </div>
             <!-- 二列目 -->
             <div
-              class="col-6 col-md-7 d-flex justify-content-around flex-md-column mx-auto gap-4"
+              class="col-3 col-md-7 d-flex justify-content-around flex-md-column mx-auto mt-3 gap-4"
             >
               <!-- 操作方法ボタンにハンドアイコンを追加 -->
               <button
                 type="button"
-                class="btn btn-outline-dark border-3 font btn-block mx-md-2"
+                class="col-md-12 btn btn-outline-dark border-3 font btn-block d-none d-md-inline"
                 data-bs-toggle="modal"
                 data-bs-target="#manualModal"
               >
                 <i class="fas fa-hand-point-up"></i>
-                <span class="d-none d-md-inline">操作方法</span>
+                <span class="">操作方法</span>
               </button>
               <!-- スタートボタンにプレイボタンアイコンを追加 -->
               <button
                 id="start"
-                class="btn btn-outline-dark border-3 font mx-md-2"
+                class="col-9 col-md-12 btn btn-outline-dark border-3 font"
               >
                 <i class="fas fa-play"></i>
                 <span class="d-none d-md-inline">スタート</span>
@@ -63,12 +61,12 @@
             </div>
             <!-- 三列目 -->
             <div
-              class="col-6 col-md-7 d-flex justify-content-around flex-md-column gap-4"
+              class="col-9 col-md-7 d-flex justify-content-around flex-md-column align-items-center mx-auto gap-4 mt-3"
             >
               <!-- 一時停止ボタンに一時停止アイコンを追加 -->
               <button
                 id="pause"
-                class="btn btn-outline-dark border-3 font mx-2"
+                class="col-3 order-0 order-md-0 col-md-12 btn btn-outline-dark border-3 font mx-md-2"
               >
                 <i class="fas fa-pause"></i>
                 <span class="d-none d-md-inline">一時停止</span>
@@ -76,7 +74,7 @@
               <!-- やり直すボタンにリフレッシュアイコンを追加 -->
               <button
                 type="button"
-                class="btn btn-outline-dark border-3 font mx-md-2"
+                class="col-3 order-1 col-md-12 btn btn-outline-dark border-3 font mx-md-2"
                 data-bs-toggle="modal"
                 data-bs-target="#confirmModal"
               >
@@ -86,17 +84,17 @@
               <!-- ミュートボタンにミュートアイコンを追加 -->
               <button
                 id="muteButton"
-                class="btn btn-outline-dark border-3 font mx-md-2"
+                class="col-3 order-2 col-md-12 btn btn-outline-dark border-3 font mx-md-2"
               >
                 <i class="fas fa-volume-up"></i>
-                ON
+                <span class="d-none d-md-inline">ON</span>
               </button>
             </div>
           </div>
 
           <!-- 真ん中のブロック -->
           <div
-            class="col-12 col-md-4 d-flex justify-content-center align-items-center"
+            class="col-7 col-md-4 d-flex justify-content-center align-items-md-center mt-4 mt-md-0"
           >
             <!-- ゲームボード -->
             <div id="board" class="">
@@ -107,45 +105,46 @@
             </div>
           </div>
 
-          <div class="col-12 col-md-4 row justify-content-center mx-auto">
+          <div class="col-5 col-md-4 row justify-content-center">
             <!-- 右側のブロック -->
-            <div class="col-6 col-md-12 d-flex justify-content-center">
-              <div class="col-6 col-md-7 d-flex flex-column">
+            <div class="col-12 col-md-12 d-flex justify-content-center align-items-center">
+              <div class="col-12 col-md-7 d-flex flex-column">
                 <!-- 十字ボタン -->
-                <div class="col-10 col-md-12 my-4">
+                <div class="col-12 col-md-12 my-4 mx-0">
                   <div class="d-flex justify-content-center">
                     <button id="upButton" class="btn btn-lg">
-                      <i class="fa fa-2x fa-caret-up"></i>
+                      <i class="fa fa-2x fa-circle-chevron-up"></i>
                     </button>
                   </div>
-                  <div class="d-flex justify-content-between gap-4">
-                    <button id="leftButton" class="btn btn-lg ">
-                      <i class="fa fa-2x fa-caret-left"></i>
+                  <div class="d-flex justify-content-center gap-4">
+                    <button id="leftButton" class="btn btn-lg mx-2">
+                      <i class="fa fa-2x fa-circle-chevron-left"></i>
                     </button>
-                    <button id="rightButton" class="btn btn-lg">
-                      <i class="fa fa-2x fa-caret-right"></i>
+                    <button id="rightButton" class="btn btn-lg mx-2">
+                      <i class="fa fa-2x fa-circle-chevron-right"></i>
                     </button>
                   </div>
                   <div class="d-flex justify-content-center">
                     <button id="downButton" class="btn btn-lg">
-                      <i class="fa fa-2x fa-caret-down"></i>
+                      <i class="fa fa-2x fa-circle-chevron-down"></i>
                     </button>
                   </div>
                 </div>
-                <!-- スコア -->
-                <div class="col-10 col-md-12 my-4">
-                  <div class="col-10 col-md-12 my-4">
+                <!-- 右下 -->
+                <div class="col-12 col-md-12">
+                  <!-- スコア -->
+                  <div class="col-md-12 my-4 mx-0 px-0">
                     <p class="fw-bold">スコア</p>
                     <div
                       id="scoreCount"
-                      class="fs-4 border border-4 border-dark btn-outline-dark py-4 rounded-3"
+                      class="fs-4 border border-4 border-dark btn-outline-dark p-4 rounded-3"
                     >
                       0
                     </div>
                   </div>
 
                   <!-- 消去ライン数 -->
-                  <div class="col-10 col-md-12 mt-4">
+                  <div class="d-none d-md-inline col-md-12">
                     <p>ライン消去数</p>
                     <div
                       id="lineCount"

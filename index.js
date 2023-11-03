@@ -1,7 +1,7 @@
 //効果音
 const gameSound = document.getElementById("gameSound");
 gameSound.loop = true;
-gameSound.volume = 0.3;
+gameSound.volume = 0.2;
 const gameOverSound = document.getElementById("gameOver");
 const manualSound = document.getElementById("manualSound");
 const pauseSound = document.getElementById("pauseSound");
@@ -11,7 +11,14 @@ const scoreUpSound = document.getElementById("scoreUpSound");
 const DROP_SPEED = 400;
 
 // 1ブロックの大きさ
-const BLOCK_SIZE = 30;
+let BLOCK_SIZE;
+
+if (window.innerWidth <= 768) { // スマートフォンの幅と仮定して768px以下
+    BLOCK_SIZE = 20;
+} else {
+    BLOCK_SIZE = 30;
+}
+
 
 // フィールドのサイズ
 const PLAY_SCREEN_WIDTH = 10;
@@ -423,7 +430,7 @@ pauseButton.addEventListener("click", function () {
     isPaused = false;
     // タイマー再開
     timerId = setInterval(dropTet, DROP_SPEED);
-    pauseButton.innerHTML = '<i class="fas fa-pause"></i> 一時停止';
+    pauseButton.innerHTML = '<i class="fas fa-pause"></i><span class="d-none d-md-inline"> 一時停止</span>';
     if (isGameOn) gameSound.play();
     pauseSound.play();
   } else {
@@ -431,7 +438,7 @@ pauseButton.addEventListener("click", function () {
     isPaused = true;
     // タイマー停止
     clearInterval(timerId);
-    pauseButton.innerHTML = '<i class="fas fa-play"></i> 再開 ';
+    pauseButton.innerHTML = '<i class="fas fa-play"></i><span class="d-none d-md-inline"> 再開</span> ';
     if (isGameOn) gameSound.pause();
     pauseSound.play();
   }
@@ -454,7 +461,7 @@ const init = () => {
 
   // ポーズ状態をリセット
   isPaused = false;
-  pauseButton.innerHTML = '<i class="fas fa-pause"></i> 一時停止';
+  pauseButton.innerHTML = '<i class="fas fa-pause"></i><span class="d-none d-md-inline"> 一時停止</span>';
 
   createTetPosition();
 
@@ -495,7 +502,7 @@ const reInit = () => {
   // ポーズ状態をリセット
   isPaused = false;
   // ポーズボタンの表示をリセット
-  pauseButton.innerHTML = '<i class="fas fa-pause"></i> 一時停止';
+  pauseButton.innerHTML = '<i class="fas fa-pause"></i><span class="d-none d-md-inline"> 一時停止</span>';
   // ゲームスタート時の音を再生
   gameSound.currentTime = 0;
   gameSound.play();
@@ -508,7 +515,6 @@ $("#manualModal, #confirmModal").on("show.bs.modal", function () {
   console.log("modal opened");
   clearInterval(timerId);
   isPaused = true;
-  pauseButton.innerText = "再開 ▶";
   manualSound.play();
   if (isGameOn) {
     gameSound.pause();
@@ -522,64 +528,12 @@ $("#manualModal, #confirmModal").on("hidden.bs.modal", function () {
     // ゲームオーバーでなければ、ゲームのタイマーを再開
     timerId = setInterval(dropTet, DROP_SPEED);
     isPaused = false;
-    pauseButton.innerHTML = '<i class="fas fa-pause"></i> 一時停止';
+    pauseButton.innerHTML = '<i class="fas fa-pause"></i><span class="d-none d-md-inline"> 一時停止</span>';
     if (isGameOn) {
       gameSound.play();
     }
   }
 });
-
-// //次のテトリミノを表示する
-// // 次のテトリミノを表示するキャンバス要素を取得
-// const nextBlockCanvas = document.getElementById("next-block");
-
-// // 2Dコンテキストを取得
-// const nextBlockCanvasContext = nextBlockCanvas.getContext("2d");
-
-// // 次のテトリミノの種類をランダムに取得
-// const nextTetroTypesIndex =
-//   Math.floor(Math.random() * (TETRO_TYPES.length - 1)) + 1;
-
-// // 次のテトリミノを描画する関数
-// const drawNextTet = () => {
-//   // テトリミノの大きさ
-//   const TETRO_SIZE = 1;
-
-//   // ブロックのサイズ
-//   const BLOCK_SIZE = nextBlockCanvas.width / TETRO_SIZE;
-
-//   // テトリミノの種類
-//   const nextTetroMino = TETRO_TYPES[nextTetroTypesIndex];
-
-//   // ブロックを描画する
-//   for (let y = 0; y < TETRO_SIZE; y++) {
-//     for (let x = 0; x < TETRO_SIZE; x++) {
-//       if (nextTetroMino[y][x]) {
-//         // 塗りつぶし色を指定
-//         nextBlockCanvasContext.fillStyle = tetColors[nextTetroTypesIndex];
-//         // ブロックを描画
-//         nextBlockCanvasContext.fillRect(
-//           x * BLOCK_SIZE,
-//           y * BLOCK_SIZE,
-//           BLOCK_SIZE,
-//           BLOCK_SIZE
-//         );
-//         // 線の色を指定
-//         nextBlockCanvasContext.strokeStyle = "black";
-//         // ブロックの枠線を描画
-//         nextBlockCanvasContext.strokeRect(
-//           x * BLOCK_SIZE,
-//           y * BLOCK_SIZE,
-//           BLOCK_SIZE,
-//           BLOCK_SIZE
-//         );
-//       }
-//     }
-//   }
-// };
-
-// // ゲーム開始時に次のテトリミノを描画
-// drawNextTet();
 
 // ミュートボタン
 const muteButton = document.getElementById("muteButton");
@@ -596,14 +550,14 @@ function toggleMute() {
     pauseSound.muted = false;
     scoreUpSound.muted = false;
 
-    muteButton.innerHTML = '<i class="fas fa-volume-up pe-2"></i>ON';
+    muteButton.innerHTML = '<i class="fas fa-volume-up pr-2"></i><span class="d-none d-md-inline">ON</span>';
   } else {
     gameSound.muted = true;
     gameOverSound.muted = true;
     manualSound.muted = true;
     pauseSound.muted = true;
     scoreUpSound.muted = true;
-    muteButton.innerHTML = '<i class="fas fa-volume-off pe-2"></i>OFF';
+    muteButton.innerHTML = '<i class="fas fa-volume-off pr-2"></i><span class="d-none d-md-inline">OFF</span>';
   }
   isMuted = !isMuted;
 }
